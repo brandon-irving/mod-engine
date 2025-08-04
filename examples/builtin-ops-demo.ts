@@ -1,9 +1,4 @@
-import {
-  defineConfig,
-  createEngine,
-  builtinOps,
-  type BuiltinOperation,
-} from "../src/index.js";
+import { defineConfig, createEngine, builtinOps } from "../src/index.js";
 
 // Demonstrate different ways to use builtinOps with TypeScript safety
 

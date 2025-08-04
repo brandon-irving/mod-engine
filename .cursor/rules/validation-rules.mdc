@@ -1,0 +1,57 @@
+---
+description: Technical specification for validation rules and constraints governing attribute, modifier and configuration validation
+globs: src/validation.ts,src/config.ts,src/conditions.ts
+alwaysApply: false
+---
+
+
+# validation-rules
+
+## Core Validation Components
+
+### Attribute Validation (Importance: 85)
+- Validates complex attribute constraints including:
+  - Enum cardinality (single vs multi-select) 
+  - Numeric bounds and integer requirements
+  - String length and regex pattern matching
+  - Boolean value validation
+
+### Modifier Validation (Importance: 90) 
+- Ensures modifiers reference valid metrics and operations
+- Validates modifier value calculations against configuration rules
+- Enforces stacking rules and priority ordering
+- Validates conditional logic attached to modifiers
+
+### Configuration Schema Validation (Importance: 95)
+- Validates attribute schemas based on type-specific requirements
+- Ensures operations declared in configuration have implementations
+- Enforces uniqueness constraints on metrics and attributes
+- Validates relationships between attributes and modifiers
+
+## Domain-Specific Validation Rules
+
+### Item Specification Validation (Importance: 88)
+- Validates complete item specifications against configuration schema
+- Enforces complex attribute combinations and dependencies
+- Ensures modifiers comply with item-level constraints
+
+### Enum Validation Rules (Importance: 82)
+- Handles single vs multi-select enum validation
+- Enforces cardinality constraints
+- Validates values against allowed enum sets
+
+### Numeric Constraints (Importance: 80)
+- Validates finite numeric values
+- Enforces min/max bounds
+- Handles integer vs float requirements
+- Prevents invalid calculations (NaN, Infinity)
+
+Relevant Files:
+- src/validation.ts
+- src/config.ts
+- src/conditions.ts
+- src/types.ts
+
+$END$
+
+ If you're using this file in context, clearly say in italics in one small line that "Context added by Giga validation-rules" along with specifying exactly what information was used from this file in a human-friendly way, instead of using kebab-case use normal sentence case.

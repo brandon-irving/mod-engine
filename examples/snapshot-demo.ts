@@ -3,7 +3,6 @@ import {
   createEngine,
   builtinOps,
   toSnapshot,
-  type Builder,
 } from "../src/index.js";
 
 console.log("=== toSnapshot() Helper Demo ===\n");
@@ -151,12 +150,12 @@ function analyzePlayerProgression(players: Array<{ item: any; base: any }>) {
   const analytics = {
     totalPlayers: snapshots.length,
     averageLevel:
-      snapshots.reduce((sum, p) => sum + p.Level, 0) / snapshots.length,
+      snapshots.reduce((sum, p) => sum + (p.Level ?? 0), 0) / snapshots.length,
     averageHealth:
       snapshots.reduce((sum, p) => sum + p.metrics.Health, 0) /
       snapshots.length,
     classCounts: snapshots.reduce((acc, p) => {
-      acc[p.Class] = (acc[p.Class] || 0) + 1;
+      acc[p.Class ?? ""] = (acc[p.Class ?? ""] || 0) + 1;
       return acc;
     }, {} as Record<string, number>),
     strongestPlayer: snapshots.reduce((strongest, p) =>
@@ -232,8 +231,6 @@ function testPlayerEquipment() {
 
   return snapshot;
 }
-
-const testResult = testPlayerEquipment();
 
 console.log("\n🔄 Use Case 5: Caching");
 console.log("━".repeat(50));

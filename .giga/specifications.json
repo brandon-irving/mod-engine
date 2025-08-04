@@ -1,0 +1,22 @@
+[
+  {
+    "fileName": "main-overview.mdc",
+    "description": "Complete system overview documenting the metric modification engine architecture, component relationships, and key concepts"
+  },
+  {
+    "fileName": "metric-operations.mdc",
+    "description": "Detailed documentation of built-in and custom metric operations, precedence rules, stacking behavior, and operation registration system"
+  },
+  {
+    "fileName": "data-models.mdc",
+    "description": "Comprehensive documentation of core data structures including item specifications, attributes, modifiers, conditions, and evaluation results"
+  },
+  {
+    "fileName": "evaluation-algorithms.mdc",
+    "description": "Detailed explanation of the metric evaluation process, condition handling, modifier application, and snapshot generation algorithms"
+  },
+  {
+    "fileName": "validation-rules.mdc",
+    "description": "Documentation of the validation system including attribute validation, modifier validation, and configuration validation rules and implementations"
+  }
+]
