@@ -12,6 +12,7 @@ import type {
 } from "./types.js";
 import { ValidationError, SchemaError } from "./errors.js";
 import { validateCondition } from "./conditions.js";
+import type { OperationInfo } from "./operations.js";
 
 /**
  * Validates an item specification against the config
@@ -503,5 +504,31 @@ function validateAttributeSchema(schema: AttributeSchema): void {
 
     default:
       throw new SchemaError(`Unknown attribute kind: ${(schema as any).kind}`);
+  }
+}
+
+/**
+ * Validates that all operations declared in config have implementations
+ */
+export function validateOperations<C extends ConfigSpec>(
+  config: C,
+  operations: Map<string, OperationInfo<C>>
+): void {
+  const builtinOps = new Set(["sum", "subtract", "multiply"]);
+  const missingOperations: string[] = [];
+
+  for (const opName of config.operations) {
+    if (!builtinOps.has(opName) && !operations.has(opName)) {
+      missingOperations.push(opName);
+    }
+  }
+
+  if (missingOperations.length > 0) {
+    const operationList = missingOperations.map((op) => `"${op}"`).join(", ");
+    throw new ValidationError(
+      `Custom operations declared but not registered: ${operationList}. ` +
+        `Use engine.registerOperation() to register these operations before using the engine.`,
+      "MISSING_OPERATIONS"
+    );
   }
 }

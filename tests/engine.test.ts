@@ -34,7 +34,7 @@ const config = defineConfig({
   ] as const,
 });
 
-const engine = createEngine(config);
+const engine = createEngine(config, { strictOperations: false });
 
 describe("Builder", () => {
   it("builds an item with attributes and modifiers", () => {

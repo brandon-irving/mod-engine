@@ -39,12 +39,19 @@ export type {
 export { defineConfig, createEngine } from "./config.js";
 export type { Engine } from "./config.js";
 
+// Engine Builder (enforces operation registration)
+export { createEngineBuilder, EngineBuilder } from "./engine-builder.js";
+
 // Builder API
 export { Builder, createConditionBuilder } from "./builder.js";
 export type { ConditionBuilder } from "./builder.js";
 
 // Validation
-export { validateItem, validateConfig } from "./validation.js";
+export {
+  validateItem,
+  validateConfig,
+  validateOperations,
+} from "./validation.js";
 
 // Serialization
 export {
@@ -69,8 +76,9 @@ export {
   multiplyOperation,
   createBuiltInOperations,
   validateNumericResult,
+  builtinOps,
 } from "./operations.js";
-export type { OperationInfo } from "./operations.js";
+export type { OperationInfo, BuiltinOperation } from "./operations.js";
 
 // Evaluation
 export {
@@ -81,6 +89,9 @@ export {
 
 // Explain helper
 export { explainEvaluation } from "./explain.js";
+
+// Snapshot helper
+export { toSnapshot } from "./snapshot.js";
 
 // Errors
 export {

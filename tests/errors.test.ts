@@ -54,7 +54,7 @@ describe("Error Handling", () => {
       attributes: [{ key: "Level", kind: "number", min: 1, max: 10 }] as const,
     });
 
-    const badEngine = createEngine(badConfig);
+    const badEngine = createEngine(badConfig, { strictOperations: false });
 
     // Register a bad operation that returns NaN
     badEngine.registerOperation?.("badOp", () => NaN, { precedence: 10 });
@@ -107,7 +107,7 @@ describe("Error Handling", () => {
           conditions: {
             op: "eq" as const,
             attr: "NonExistentAttr" as any,
-            value: "test",
+            value: 5,
           },
         },
       ],

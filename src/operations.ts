@@ -1,6 +1,19 @@
 import type { ConfigSpec, OperationImpl } from "./types.js";
 
 /**
+ * Union type of all built-in operations
+ */
+export type BuiltinOperation = "sum" | "subtract" | "multiply";
+
+/**
+ * Helper function to create a typed array of built-in operations
+ * Provides autocomplete and type safety for operation selection
+ */
+export function builtinOps<T extends BuiltinOperation[]>(...operations: T): T {
+  return operations;
+}
+
+/**
  * Built-in operation: sum
  * Adds the modifier value to the current metric value
  */

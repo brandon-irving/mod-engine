@@ -6,7 +6,11 @@ import type {
   MetricOf,
   OperationImpl,
 } from "./types.js";
-import { validateConfig, validateItem } from "./validation.js";
+import {
+  validateConfig,
+  validateItem,
+  validateOperations,
+} from "./validation.js";
 import { evaluateItem } from "./evaluation.js";
 import { createBuiltInOperations } from "./operations.js";
 import { Builder } from "./builder.js";
@@ -39,12 +43,20 @@ export interface Engine<C extends ConfigSpec> {
 /**
  * Creates an engine instance from a configuration
  */
-export function createEngine<const C extends ConfigSpec>(config: C): Engine<C> {
+export function createEngine<const C extends ConfigSpec>(
+  config: C,
+  options?: { strictOperations?: boolean }
+): Engine<C> {
   // Validate the configuration first
   validateConfig(config);
 
   // Create operations registry with built-ins
   const operations = createBuiltInOperations<C>();
+
+  // Validate that all declared operations have implementations
+  if (options?.strictOperations !== false) {
+    validateOperations(config, operations);
+  }
 
   const engine: Engine<C> = {
     builder(name?: string): Builder<C> {

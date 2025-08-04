@@ -1,9 +1,10 @@
-import { defineConfig, createEngine } from "../src/index.js";
+import { defineConfig, createEngine, builtinOps } from "../src/index.js";
 
 // Define the configuration for an RPG item system
+// builtinOps() provides autocomplete and type safety for built-in operations
 const config = defineConfig({
   metrics: ["Health", "Strength", "Speed", "Mana"] as const,
-  operations: ["sum", "subtract", "multiply"] as const,
+  operations: builtinOps("sum", "subtract", "multiply"),
   attributes: [
     {
       key: "Rarity",
@@ -36,7 +37,17 @@ const config = defineConfig({
     },
   ] as const,
 });
-
+const exampleCOnfig = defineConfig({
+  metrics: ["Health", "Strength", "Speed", "Mana"] as const,
+  operations: ["sum", "subtract", "multiply"] as const,
+  attributes: [
+    {
+      key: "Rarity",
+      kind: "enum",
+      values: [],
+    },
+  ],
+});
 // Create the engine
 const engine = createEngine(config);
 
@@ -60,6 +71,12 @@ const basicSword = engine
 const basicResult = engine.evaluate(basicSword);
 console.log("Basic Sword Metrics:", basicResult.metrics);
 console.log("Applied Modifiers:", basicResult.applied.length);
+
+// Note: Different ways to use builtinOps():
+// 1. All built-ins: builtinOps("sum", "subtract", "multiply")
+// 2. Subset: builtinOps("sum", "multiply")
+// 3. With custom: [...builtinOps("sum", "multiply"), "customOp"] as const
+// 4. Mixed order: builtinOps("multiply", "sum") - order doesn't matter for built-ins
 
 // Example 2: Conditional modifiers
 console.log("\n=== Example 2: Conditional Item ===");
