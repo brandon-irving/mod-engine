@@ -129,7 +129,7 @@ function validateAttributeValue(
       default:
         errors.push({
           path,
-          message: `Unknown attribute kind: ${(schema as any).kind}`,
+          message: `Unknown attribute kind: ${(schema as unknown as { kind: string }).kind}`,
           code: "UNKNOWN_ATTRIBUTE_KIND",
         });
     }
@@ -303,7 +303,7 @@ function validateStringValue(
           code: "PATTERN_MISMATCH",
         });
       }
-    } catch (error) {
+    } catch {
       errors.push({
         path,
         message: `Invalid regex pattern: ${schema.pattern}`,
@@ -442,7 +442,7 @@ export function validateConfig<C extends ConfigSpec>(config: C): void {
  */
 function validateAttributeSchema(schema: AttributeSchema): void {
   switch (schema.kind) {
-    case "enum":
+    case "enum": {
       if (!Array.isArray(schema.values) || schema.values.length === 0) {
         throw new SchemaError(
           `Enum attribute '${schema.key}' must have non-empty values array`
@@ -465,6 +465,7 @@ function validateAttributeSchema(schema: AttributeSchema): void {
         );
       }
       break;
+    }
 
     case "number":
       if (
@@ -490,7 +491,7 @@ function validateAttributeSchema(schema: AttributeSchema): void {
       if (schema.pattern !== undefined) {
         try {
           new RegExp(schema.pattern);
-        } catch (error) {
+        } catch {
           throw new SchemaError(
             `String attribute '${schema.key}' has invalid regex pattern: ${schema.pattern}`
           );
@@ -503,7 +504,7 @@ function validateAttributeSchema(schema: AttributeSchema): void {
       break;
 
     default:
-      throw new SchemaError(`Unknown attribute kind: ${(schema as any).kind}`);
+      throw new SchemaError(`Unknown attribute kind: ${(schema as unknown as { kind: string }).kind}`);
   }
 }
 

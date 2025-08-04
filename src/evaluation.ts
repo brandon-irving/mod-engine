@@ -29,7 +29,7 @@ export function evaluateItem<C extends ConfigSpec>(
     }
 
     // Filter modifiers by conditions and apply stacking rules
-    const applicableModifiers = filterAndStackModifiers(item, config);
+    const applicableModifiers = filterAndStackModifiers(item);
 
     // Sort modifiers by priority and operation precedence
     const sortedModifiers = sortModifiers(applicableModifiers, operations);
@@ -42,8 +42,7 @@ export function evaluateItem<C extends ConfigSpec>(
         modifier,
         metrics,
         operations,
-        item,
-        config
+        item
       );
       if (application) {
         applied.push(application);
@@ -67,8 +66,7 @@ export function evaluateItem<C extends ConfigSpec>(
  * Filters modifiers by conditions and applies stacking rules
  */
 function filterAndStackModifiers<C extends ConfigSpec>(
-  item: ItemSpec<C>,
-  _config: C
+  item: ItemSpec<C>
 ): Modifier<C>[] {
   // First filter by conditions
   const validModifiers = item.modifiers.filter((modifier) => {
@@ -78,7 +76,7 @@ function filterAndStackModifiers<C extends ConfigSpec>(
 
     try {
       return evaluateCondition(modifier.conditions, item.attributes);
-    } catch (error) {
+    } catch {
       // If condition evaluation fails, skip the modifier
       return false;
     }
@@ -130,7 +128,7 @@ function applyStackingRules<C extends ConfigSpec>(
     } else {
       // Pick the modifier with highest absolute effect
       // Tie-break by priority (higher first), then by insertion order
-      const best = group.reduce((best, current, _index) => {
+      const best = group.reduce((best, current) => {
         const bestAbsValue = Math.abs(best.value);
         const currentAbsValue = Math.abs(current.value);
 
@@ -196,8 +194,7 @@ function applyModifier<C extends ConfigSpec>(
   modifier: Modifier<C>,
   metrics: Record<MetricOf<C>, number>,
   operations: Map<string, OperationInfo<C>>,
-  item: ItemSpec<C>,
-  _config: C
+  item: ItemSpec<C>
 ): ModifierApplication<C> | null {
   const operationInfo = operations.get(modifier.operation);
 

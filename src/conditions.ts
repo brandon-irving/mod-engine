@@ -29,20 +29,10 @@ export function evaluateCondition<C extends ConfigSpec>(
         );
 
       case "eq":
-        return evaluateEquality(
-          condition.attr,
-          condition.value,
-          attributes,
-          path
-        );
+        return evaluateEquality(condition.attr, condition.value, attributes);
 
       case "in":
-        return evaluateInclusion(
-          condition.attr,
-          condition.values,
-          attributes,
-          path
-        );
+        return evaluateInclusion(condition.attr, condition.values, attributes);
 
       case "includes":
         return evaluateContains(
@@ -90,7 +80,9 @@ export function evaluateCondition<C extends ConfigSpec>(
 
       default:
         throw new ConditionError(
-          `Unknown condition operation: ${(condition as any).op}`,
+          `Unknown condition operation: ${
+            (condition as unknown as { op: string }).op
+          }`,
           path
         );
     }
@@ -113,8 +105,7 @@ export function evaluateCondition<C extends ConfigSpec>(
 function evaluateEquality<C extends ConfigSpec>(
   attr: string,
   value: unknown,
-  attributes: Attributes<C>,
-  _path: string
+  attributes: Attributes<C>
 ): boolean {
   const attrValue = attributes[attr as keyof Attributes<C>];
 
@@ -139,8 +130,7 @@ function evaluateEquality<C extends ConfigSpec>(
 function evaluateInclusion<C extends ConfigSpec>(
   attr: string,
   values: readonly unknown[],
-  attributes: Attributes<C>,
-  _path: string
+  attributes: Attributes<C>
 ): boolean {
   const attrValue = attributes[attr as keyof Attributes<C>];
 
@@ -262,7 +252,9 @@ export function validateCondition<C extends ConfigSpec>(
 
       default:
         throw new ConditionError(
-          `Unknown condition operation: ${(condition as any).op}`,
+          `Unknown condition operation: ${
+            (condition as unknown as { op: string }).op
+          }`,
           path
         );
     }

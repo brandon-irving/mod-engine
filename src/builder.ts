@@ -260,7 +260,10 @@ export class Builder<C extends ConfigSpec> {
    * Builds and returns the immutable item specification
    */
   build(): ItemSpec<C> {
-    const result: any = {
+    const result: { name?: string } & Pick<
+      ItemSpec<C>,
+      "attributes" | "modifiers"
+    > = {
       attributes: this.attributes as Attributes<C>,
       modifiers: this.modifiers as Modifier<C>[],
     };
