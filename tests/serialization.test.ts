@@ -12,7 +12,7 @@ import {
   fromJSON,
   deepClone,
   SerializationError,
-} from "../src/index.js";
+} from "../src/index";
 
 const config = defineConfig({
   metrics: ["Health", "Mana"] as const,

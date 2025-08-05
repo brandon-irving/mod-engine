@@ -7,9 +7,9 @@ import type {
   MetricOf,
   EvalContext,
 } from "./types.js";
-import { EvaluationError } from "./errors.js";
-import { evaluateCondition } from "./conditions.js";
-import type { OperationInfo } from "./operations.js";
+import { EvaluationError } from "./errors";
+import { evaluateCondition } from "./conditions";
+import type { OperationInfo } from "./operations";
 
 /**
  * Evaluates an item specification and returns the computed metrics
@@ -38,12 +38,7 @@ export function evaluateItem<C extends ConfigSpec>(
     const applied: ModifierApplication<C>[] = [];
 
     for (const modifier of sortedModifiers) {
-      const application = applyModifier(
-        modifier,
-        metrics,
-        operations,
-        item
-      );
+      const application = applyModifier(modifier, metrics, operations, item);
       if (application) {
         applied.push(application);
       }

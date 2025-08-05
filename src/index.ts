@@ -1,105 +1,96 @@
 // Core types
 export type {
-  // Configuration types
-  ConfigSpec,
-  AttributeSchema,
-  EnumAttributeSchema,
-  BooleanAttributeSchema,
-  NumberAttributeSchema,
-  StringAttributeSchema,
-
-  // Data types
-  ItemSpec,
-  Modifier,
-  Condition,
-  Stacking,
   Attributes,
-
-  // Result types
-  EvaluationResult,
-  ModifierApplication,
-  ValidationResult,
-  ValidationError as ValidationErrorType,
-
-  // Utility types
-  MetricOf,
-  OperationOf,
+  AttributeSchema,
   AttrKeyOf,
   AttrValueOf,
-
+  BooleanAttributeSchema,
+  Condition,
+  // Configuration types
+  ConfigSpec,
+  EnumAttributeSchema,
+  EvalContext,
+  // Result types
+  EvaluationResult,
+  // Data types
+  ItemSpec,
+  // Utility types
+  MetricOf,
+  Modifier,
+  ModifierApplication,
+  NumberAttributeSchema,
   // Function types
   OperationImpl,
-  EvalContext,
-
+  OperationOf,
   // Serialization types
   SerializedData,
-} from "./types.js";
+  Stacking,
+  StringAttributeSchema,
+  ValidationError as ValidationErrorType,
+  ValidationResult,
+} from "./types";
 
 // Core functions
-export { defineConfig, createEngine } from "./config.js";
-export type { Engine } from "./config.js";
+export { createEngine, defineConfig } from "./config";
+export type { Engine } from "./config";
 
 // Engine Builder (enforces operation registration)
-export { createEngineBuilder, EngineBuilder } from "./engine-builder.js";
+export { createEngineBuilder, EngineBuilder } from "./engine-builder";
 
 // Builder API
-export { Builder, createConditionBuilder } from "./builder.js";
-export type { ConditionBuilder } from "./builder.js";
+export { Builder, createConditionBuilder } from "./builder";
+export type { ConditionBuilder } from "./builder";
 
 // Validation
-export {
-  validateItem,
-  validateConfig,
-  validateOperations,
-} from "./validation.js";
+export { validateConfig, validateItem, validateOperations } from "./validation";
 
 // Serialization
 export {
-  serializeItem,
-  deserializeItem,
-  serializeModifiers,
-  deserializeModifiers,
-  serializeEvaluationResult,
-  deserializeEvaluationResult,
-  toJSON,
-  fromJSON,
   deepClone,
-} from "./serialization.js";
+  deserializeEvaluationResult,
+  deserializeItem,
+  deserializeModifiers,
+  fromJSON,
+  serializeEvaluationResult,
+  serializeItem,
+  serializeModifiers,
+  toJSON,
+} from "./serialization";
 
 // Conditions
-export { evaluateCondition, validateCondition } from "./conditions.js";
+export { evaluateCondition, validateCondition } from "./conditions";
 
 // Operations
 export {
-  sumOperation,
-  subtractOperation,
-  multiplyOperation,
-  createBuiltInOperations,
-  validateNumericResult,
   builtinOps,
-} from "./operations.js";
-export type { OperationInfo, BuiltinOperation } from "./operations.js";
+  createBuiltInOperations,
+  multiplyOperation,
+  subtractOperation,
+  sumOperation,
+  validateNumericResult,
+} from "./operations";
+export type { BuiltinOperation, OperationInfo } from "./operations";
 
 // Evaluation
 export {
-  evaluateItem,
   createMetricsSnapshot,
+  evaluateItem,
   validateMetricsCompleteness,
-} from "./evaluation.js";
+} from "./evaluation";
 
 // Explain helper
-export { explainEvaluation } from "./explain.js";
+export { explainEvaluation } from "./explain";
 
 // Snapshot helper
-export { toSnapshot } from "./snapshot.js";
+export { toSnapshot } from "./snapshot";
 
 // Errors
 export {
-  ModEngineError,
-  SchemaError,
-  ValidationError,
-  OperationError,
   ConditionError,
   EvaluationError,
+  ModEngineError,
+  OperationError,
+  SchemaError,
   SerializationError,
-} from "./errors.js";
+  ValidationError,
+} from "./errors";

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { defineConfig, createEngine } from "../src/index.js";
+import { defineConfig, createEngine } from "../src/index";
 
 const config = defineConfig({
   metrics: ["Health", "Strength"] as const,

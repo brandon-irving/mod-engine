@@ -11,7 +11,7 @@ import {
   createEngineBuilder,
   ItemSpec,
   EvaluationResult,
-} from "../src/index.js";
+} from "../src/index";
 import { expect } from "vitest";
 
 export const basketballConfig = defineConfig({

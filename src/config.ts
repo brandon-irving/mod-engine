@@ -1,19 +1,15 @@
+import { Builder } from "./builder";
+import { evaluateItem } from "./evaluation";
+import { createBuiltInOperations } from "./operations";
 import type {
   ConfigSpec,
-  ItemSpec,
   EvaluationResult,
-  ValidationResult,
+  ItemSpec,
   MetricOf,
   OperationImpl,
-} from "./types.js";
-import {
-  validateConfig,
-  validateItem,
-  validateOperations,
-} from "./validation.js";
-import { evaluateItem } from "./evaluation.js";
-import { createBuiltInOperations } from "./operations.js";
-import { Builder } from "./builder.js";
+  ValidationResult,
+} from "./types";
+import { validateConfig, validateItem, validateOperations } from "./validation";
 
 /**
  * Defines a configuration and returns it with strong typing

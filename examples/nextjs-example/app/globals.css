@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply h-full bg-slate-50 text-slate-900;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .rarity-common {
+    @apply text-rarity-common border-rarity-common;
+  }
+
+  .rarity-rare {
+    @apply text-rarity-rare border-rarity-rare;
+  }
+
+  .rarity-epic {
+    @apply text-rarity-epic border-rarity-epic;
+  }
+
+  .rarity-legendary {
+    @apply text-rarity-legendary border-rarity-legendary;
+  }
+
+  .metric-card {
+    @apply bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow;
+  }
+
+  .modifier-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+}

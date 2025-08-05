@@ -4,7 +4,7 @@ import {
   createEngine,
   validateConfig,
   SchemaError,
-} from "../src/index.js";
+} from "../src/index";
 
 describe("Configuration", () => {
   describe("defineConfig", () => {

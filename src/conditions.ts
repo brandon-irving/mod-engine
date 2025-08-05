@@ -1,5 +1,5 @@
-import type { ConfigSpec, Condition, Attributes } from "./types.js";
-import { ConditionError } from "./errors.js";
+import { ConditionError } from "./errors";
+import type { Attributes, Condition, ConfigSpec } from "./types";
 
 /**
  * Evaluates a condition against the given attributes

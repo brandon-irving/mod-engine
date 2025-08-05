@@ -5,7 +5,7 @@ import {
   multiplyOperation,
   createBuiltInOperations,
   validateNumericResult,
-} from "../src/index.js";
+} from "../src/index";
 
 describe("Operations", () => {
   describe("Built-in Operations", () => {

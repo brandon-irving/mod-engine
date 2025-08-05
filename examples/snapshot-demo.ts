@@ -3,7 +3,7 @@ import {
   createEngine,
   builtinOps,
   toSnapshot,
-} from "../src/index.js";
+} from "../src/index";
 
 console.log("=== toSnapshot() Helper Demo ===\n");
 

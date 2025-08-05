@@ -1,7 +1,7 @@
 import type { ConfigSpec, OperationImpl, OperationOf } from "./types.js";
-import { validateConfig } from "./validation.js";
-import { createBuiltInOperations } from "./operations.js";
-import { createEngine, type Engine } from "./config.js";
+import { validateConfig } from "./validation";
+import { createBuiltInOperations } from "./operations";
+import { createEngine, type Engine } from "./config";
 
 /**
  * Type-safe engine builder that enforces operation registration

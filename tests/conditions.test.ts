@@ -3,7 +3,7 @@ import {
   defineConfig,
   createEngine,
   createConditionBuilder,
-} from "../src/index.js";
+} from "../src/index";
 
 const config = defineConfig({
   metrics: ["Health", "Mana"] as const,

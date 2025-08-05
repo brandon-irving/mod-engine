@@ -5,7 +5,7 @@ import type {
   SerializedData,
   EvaluationResult,
 } from "./types.js";
-import { SerializationError } from "./errors.js";
+import { SerializationError } from "./errors";
 
 /**
  * Current serialization version

@@ -1,5 +1,5 @@
 import type { ConfigSpec, ItemSpec, MetricOf, Attributes } from "./types.js";
-import type { Engine } from "./config.js";
+import type { Engine } from "./config";
 
 /**
  * Creates a flat, computed representation combining evaluated metrics and attributes.

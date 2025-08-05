@@ -4,7 +4,7 @@ import {
   createEngine,
   defineConfig,
   toSnapshot,
-} from "../src/index.js";
+} from "../src/index";
 
 const config = defineConfig({
   metrics: ["Health", "Strength", "Speed"] as const,

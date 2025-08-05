@@ -10,9 +10,9 @@ import type {
   StringAttributeSchema,
   Attributes,
 } from "./types.js";
-import { ValidationError, SchemaError } from "./errors.js";
-import { validateCondition } from "./conditions.js";
-import type { OperationInfo } from "./operations.js";
+import { ValidationError, SchemaError } from "./errors";
+import { validateCondition } from "./conditions";
+import type { OperationInfo } from "./operations";
 
 /**
  * Validates an item specification against the config
@@ -129,7 +129,9 @@ function validateAttributeValue(
       default:
         errors.push({
           path,
-          message: `Unknown attribute kind: ${(schema as unknown as { kind: string }).kind}`,
+          message: `Unknown attribute kind: ${
+            (schema as unknown as { kind: string }).kind
+          }`,
           code: "UNKNOWN_ATTRIBUTE_KIND",
         });
     }
@@ -504,7 +506,11 @@ function validateAttributeSchema(schema: AttributeSchema): void {
       break;
 
     default:
-      throw new SchemaError(`Unknown attribute kind: ${(schema as unknown as { kind: string }).kind}`);
+      throw new SchemaError(
+        `Unknown attribute kind: ${
+          (schema as unknown as { kind: string }).kind
+        }`
+      );
   }
 }
 

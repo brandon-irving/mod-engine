@@ -4,7 +4,7 @@ import {
   createEngineBuilder,
   builtinOps,
   type OperationImpl,
-} from "../src/index.js";
+} from "../src/index";
 
 console.log("=== Enforced Operation Registration Demo ===\n");
 

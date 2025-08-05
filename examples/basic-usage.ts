@@ -1,4 +1,4 @@
-import { defineConfig, createEngine, builtinOps } from "../src/index.js";
+import { defineConfig, createEngine, builtinOps } from "../src/index";
 
 // Define the configuration for an RPG item system
 // builtinOps() provides autocomplete and type safety for built-in operations
@@ -155,7 +155,7 @@ if (!validationResult.ok) {
 
 // Example 5: Serialization
 console.log("\n=== Example 5: Serialization ===");
-import { serializeItem, toJSON } from "../src/index.js";
+import { serializeItem, toJSON } from "../src/index";
 
 const serialized = serializeItem(magicSword);
 const jsonString = toJSON(serialized);

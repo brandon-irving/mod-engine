@@ -1,17 +1,17 @@
+import { ValidationError } from "./errors";
+import { deepClone } from "./serialization";
 import type {
-  ConfigSpec,
-  ItemSpec,
-  Modifier,
-  Condition,
+  Attributes,
   AttrKeyOf,
   AttrValueOf,
+  Condition,
+  ConfigSpec,
+  ItemSpec,
   MetricOf,
+  Modifier,
   OperationOf,
   Stacking,
-  Attributes,
-} from "./types.js";
-import { ValidationError } from "./errors.js";
-import { deepClone } from "./serialization.js";
+} from "./types";
 
 /**
  * Fluent builder for creating item specifications

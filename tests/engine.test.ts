@@ -4,7 +4,7 @@ import {
   createEngine,
   serializeItem,
   deserializeItem,
-} from "../src/index.js";
+} from "../src/index";
 
 // Reusable configuration for tests
 const config = defineConfig({

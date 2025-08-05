@@ -5,7 +5,7 @@ import {
   ValidationError,
   EvaluationError,
   SerializationError,
-} from "../src/index.js";
+} from "../src/index";
 
 const config = defineConfig({
   metrics: ["Health"] as const,
