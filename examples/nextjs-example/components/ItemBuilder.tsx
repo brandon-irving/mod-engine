@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     createModifier,
     buildItem,
@@ -67,6 +67,11 @@ export function ItemBuilder() {
             setValidationErrors([error instanceof Error ? error.message : 'Unknown error'])
         }
     }
+
+    // Auto-evaluate whenever itemState or modifiers change
+    useEffect(() => {
+        buildAndEvaluateItem()
+    }, [itemState, modifiers]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const addModifier = () => {
         setModifiers([...modifiers, createModifier()])
@@ -221,13 +226,6 @@ export function ItemBuilder() {
                             ))}
                         </div>
                     </div>
-
-                    <button
-                        onClick={buildAndEvaluateItem}
-                        className="w-full bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-green-600"
-                    >
-                        🔮 Build & Evaluate Item
-                    </button>
 
                     {validationErrors.length > 0 && (
                         <div className="bg-red-50 border border-red-200 rounded p-4">

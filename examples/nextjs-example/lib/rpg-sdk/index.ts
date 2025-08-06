@@ -21,6 +21,9 @@ export type {
   RpgSdkContext,
 } from "./types";
 
+// Re-export mod-engine types for consistency
+export type { ModifierApplication } from "mod-engine";
+
 // Constants
 import {
   ATTRIBUTE_DEFINITIONS,

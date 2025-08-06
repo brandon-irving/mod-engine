@@ -1,13 +1,14 @@
 'use client'
 
+import React from 'react'
 import {
     METRIC_ICONS,
     getMetricColor,
     formatMetricValue,
     type EvaluationResult,
-    type RpgConfig
+    type RpgConfig,
+    type ModifierApplication
 } from '@/lib/rpg-sdk'
-import type { ModifierApplication } from 'mod-engine'
 
 interface EvaluationResultsProps {
     result: EvaluationResult<RpgConfig> | null
@@ -20,6 +21,8 @@ export function EvaluationResults({ result, initialMetrics }: EvaluationResultsP
     const getMetricIcon = (metric: string) => {
         return METRIC_ICONS[metric as keyof typeof METRIC_ICONS] || '📊'
     }
+
+
 
     return (
         <div className="space-y-6">
@@ -97,12 +100,11 @@ export function EvaluationResults({ result, initialMetrics }: EvaluationResultsP
                                             Priority: {application.modifier.priority || 10}
                                         </div>
                                     </div>
-
                                     <div className="text-sm text-gray-600">
                                         <span className="font-medium">Result:</span>
                                         <span className="ml-1">
-                                            {Math.round(application.before * 100) / 100} → {' '}
-                                            {Math.round(application.after * 100) / 100}
+                                            {Math.round((application.appliedValue ?? 0) * 100) / 100} → {' '}
+                                            {Math.round((application.resultingValue ?? 0) * 100) / 100}
                                         </span>
                                         {application.modifier.source && (
                                             <span className="ml-3 px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">
