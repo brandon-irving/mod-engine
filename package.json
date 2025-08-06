@@ -23,7 +23,11 @@
     "bench": "tsx benchmarks/performance.ts",
     "lint": "eslint src/**/*.ts",
     "clean": "rm -rf dist",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "docs:start": "cd docs && npm start",
+    "docs:build": "cd docs && npm run build",
+    "docs:serve": "cd docs && npm run serve",
+    "docs:deploy": "cd docs && npm run deploy"
   },
   "keywords": [
     "typescript",
