@@ -78,10 +78,10 @@ Tests if attribute equals the specified value.
 
 ```typescript
 // Value in array
-{ op: "includes", attr: "Rarity", value: ["Epic", "Legendary"] }
+{ op: "in", attr: "Rarity", values: ["Epic", "Legendary"] }
 
 // Array contains value (for multi-value attributes)
-{ op: "contains", attr: "Tags", value: "Weapon" }
+{ op: "includes", attr: "Tags", value: "Weapon" }
 ```
 
 ### Logical Conditions
@@ -91,7 +91,7 @@ Tests if attribute equals the specified value.
 ```typescript
 {
   op: "and",
-  conditions: [
+  clauses: [
     { op: "eq", attr: "Enchanted", value: true },
     { op: "gte", attr: "Level", value: 25 }
   ]
@@ -103,7 +103,7 @@ Tests if attribute equals the specified value.
 ```typescript
 {
   op: "or",
-  conditions: [
+  clauses: [
     { op: "eq", attr: "Rarity", value: "Epic" },
     { op: "eq", attr: "Rarity", value: "Legendary" }
   ]
@@ -115,7 +115,7 @@ Tests if attribute equals the specified value.
 ```typescript
 {
   op: "not",
-  condition: { op: "eq", attr: "Cursed", value: true }
+  clause: { op: "eq", attr: "Cursed", value: true }
 }
 ```
 
@@ -124,18 +124,18 @@ Tests if attribute equals the specified value.
 ```typescript
 {
   op: "and",
-  conditions: [
+  clauses: [
     { op: "eq", attr: "Class", value: "Warrior" },
     {
       op: "or",
-      conditions: [
+      clauses: [
         { op: "gte", attr: "Level", value: 50 },
         { op: "eq", attr: "HasExperience", value: true }
       ]
     },
     {
       op: "not",
-      condition: { op: "eq", attr: "Cursed", value: true }
+      clause: { op: "eq", attr: "Cursed", value: true }
     }
   ]
 }

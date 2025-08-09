@@ -37,9 +37,8 @@ const item = engine
 const serialized = serializeItem(item);
 console.log(serialized);
 // {
-//   data: { name: "Magic Sword", attributes: {...}, modifiers: [...] },
-//   version: "1.0.0",
-//   timestamp: 1640995200000
+//   version: 1,
+//   data: { name: "Magic Sword", attributes: {...}, modifiers: [...] }
 // }
 ```
 
@@ -163,7 +162,7 @@ import { toJSON } from "mod-engine";
 
 const jsonString = toJSON(serializeItem(item));
 console.log(jsonString);
-// '{"data":{"name":"Magic Sword",...},"version":"1.0.0","timestamp":...}'
+// '{"version":1,"data":{"name":"Magic Sword",...}}'
 ```
 
 ### fromJSON
@@ -223,9 +222,8 @@ console.log(original.stats.damage); // Still 50
 
 ```typescript
 interface SerializedData<T> {
+  readonly version: number;
   readonly data: T;
-  readonly version: string;
-  readonly timestamp: number;
 }
 ```
 
@@ -233,7 +231,6 @@ interface SerializedData<T> {
 
 - `data` - The actual serialized object
 - `version` - Mod-engine version used for serialization
-- `timestamp` - Unix timestamp of serialization
 
 ### Version Compatibility
 
@@ -241,12 +238,7 @@ The serialization format includes version information for compatibility checking
 
 ```typescript
 const serialized = serializeItem(item);
-console.log(serialized.version); // "1.0.0"
-
-// Future versions can check compatibility
-if (serialized.version !== currentVersion) {
-  console.warn("Version mismatch - migration may be needed");
-}
+console.log(serialized.version); // 1
 ```
 
 ## Complete Workflow Examples
@@ -281,7 +273,7 @@ const jsonData = toJSON(serialized);
 await database.items.create({
   playerId: "user123",
   itemData: jsonData,
-  createdAt: new Date(serialized.timestamp),
+  createdAt: new Date(),
 });
 ```
 
@@ -312,7 +304,7 @@ app.get("/api/items/:id", async (req, res) => {
   const response = {
     item: serializeItem(item),
     evaluation: serializeEvaluationResult(result),
-    timestamp: Date.now(),
+    // optional: add your own timestamp if needed
   };
 
   res.json(response);
@@ -366,7 +358,7 @@ function exportInventory(playerItems: ItemSpec<Config>[]) {
     version: "1.0.0",
   };
 
-  return toJSON({ data: inventory, version: "1.0.0", timestamp: Date.now() });
+  return toJSON({ version: 1, data: inventory });
 }
 
 // Import player inventory

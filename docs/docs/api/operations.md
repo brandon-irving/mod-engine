@@ -70,7 +70,7 @@ const config = defineConfig({
 
 ### createBuiltInOperations
 
-Creates a map of built-in operations.
+Creates a map of built-in operations along with precedence values.
 
 ```typescript
 function createBuiltInOperations<C extends ConfigSpec>(): Map<
@@ -167,9 +167,9 @@ engine.registerOperation("pow", powOp, { precedence: 100 });
 
 Default precedence for built-ins:
 
-- `sum`: 0
-- `subtract`: 0
-- `multiply`: 0
+- `sum`: 10
+- `subtract`: 10
+- `multiply`: 20
 
 ## Registration Methods
 

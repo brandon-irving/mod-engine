@@ -14,7 +14,7 @@ This section provides comprehensive documentation for all Mod-Engine APIs, types
 
 - [`engine.builder()`](./builder.md) - Create item builder
 - [`engine.evaluate()`](./evaluation.md) - Evaluate item
-- [`engine.conditionBuilder()`](./conditions.md) - Create condition builder
+- [`createConditionBuilder()`](./conditions.md) - Create condition builder
 
 ### Builder
 
@@ -57,7 +57,7 @@ This section provides comprehensive documentation for all Mod-Engine APIs, types
 ### Custom Operations
 
 - [`OperationImpl`](./operations.md#operationimpl) - Operation implementation type
-- [`createOperation()`](./operations.md#createoperation) - Create custom operation
+- `engine.registerOperation()` - Register a custom operation implementation
 
 ## Validation
 

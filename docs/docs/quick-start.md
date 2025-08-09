@@ -222,7 +222,8 @@ Now that you understand the basics:
 ```typescript
 // Complex condition using condition builder
 .when(
-  engine.conditionBuilder()
+  // Use createConditionBuilder<typeof config>() instead
+  // engine.conditionBuilder()
     .and({ op: "eq", attr: "Enchanted", value: true })
     .and({ op: "gte", attr: "Level", value: 10 })
     .build()

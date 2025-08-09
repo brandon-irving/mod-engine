@@ -37,9 +37,7 @@ function evaluateItem<C extends ConfigSpec>(
 import { evaluateItem } from "mod-engine";
 
 // Usually called through engine.evaluate()
-const result = engine.evaluate(item, {
-  base: { Health: 100, Damage: 10 },
-});
+const result = engine.evaluate(item, { base: { Health: 100, Damage: 10 } });
 
 console.log(result.metrics);
 // { Health: 250, Damage: 75 }
@@ -135,8 +133,8 @@ Apply each modifier in order:
 ```typescript
 for (const modifier of sortedModifiers) {
   const before = metrics[modifier.metric];
-  const operation = operations.get(modifier.operation);
-  const after = operation.impl(before, modifier.value, { attributes, item });
+  const operation = operations.get(modifier.operation)!;
+  const after = operation.impl(before, modifier.value, context);
   metrics[modifier.metric] = after;
 
   // Track application
@@ -172,9 +170,10 @@ Array of modifier applications with traces:
       value: 50,
       conditions: { op: "eq", attr: "Enchanted", value: true },
     },
+    appliedValue: 50,
     before: 100,
     after: 150,
-    operation: "sum",
+    resultingValue: 150,
   },
   // ... more applications
 ];

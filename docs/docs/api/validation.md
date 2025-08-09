@@ -294,14 +294,14 @@ Validates string attributes against constraints.
 
 ```typescript
 // ❌ Invalid operation
-.custom("Damage", "invalidOp") // Not in config.operations
+.apply("Damage", "invalidOp") // Not in config.operations
 
 // ❌ Unregistered operation
-.custom("Damage", "pow") // Declared but not registered
+.apply("Damage", "pow") // Declared but not registered
 
 // ✅ Valid
 .increase("Damage") // Built-in sum operation
-.custom("Damage", "pow") // Registered custom operation
+.apply("Damage", "pow") // Registered custom operation
 ```
 
 ### Value Validation

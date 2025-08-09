@@ -211,9 +211,10 @@ Record of a modifier application with before/after values.
 ```typescript
 interface ModifierApplication<C extends ConfigSpec> {
   readonly modifier: Modifier<C>;
+  readonly appliedValue: number;
   readonly before: number;
   readonly after: number;
-  readonly operation: OperationOf<C>;
+  readonly resultingValue: number; // deprecated alias for `after`
 }
 ```
 
@@ -223,8 +224,9 @@ Context passed to operation implementations.
 
 ```typescript
 interface EvalContext<C extends ConfigSpec> {
-  readonly attributes: Attributes<C>;
   readonly item: ItemSpec<C>;
+  readonly modifier: Modifier<C>;
+  readonly currentMetrics: Record<MetricOf<C>, number>;
 }
 ```
 
@@ -244,10 +246,10 @@ Basic attribute comparison conditions.
 
 ```typescript
 type SimpleCondition<C extends ConfigSpec> =
-  | { op: "eq"; attr: AttrKeyOf<C>; value: AttrValueOf<C, attr> }
+  | { op: "eq"; attr: AttrKeyOf<C>; value: AttrValueOf<C, any> }
   | { op: "gt" | "gte" | "lt" | "lte"; attr: AttrKeyOf<C>; value: number }
-  | { op: "includes"; attr: AttrKeyOf<C>; value: AttrValueOf<C, attr>[] }
-  | { op: "contains"; attr: AttrKeyOf<C>; value: AttrValueOf<C, attr> };
+  | { op: "in"; attr: AttrKeyOf<C>; values: AttrValueOf<C, any>[] }
+  | { op: "includes"; attr: AttrKeyOf<C>; value: AttrValueOf<C, any> };
 ```
 
 ### LogicalCondition
@@ -256,9 +258,9 @@ Logical operators for combining conditions.
 
 ```typescript
 type LogicalCondition<C extends ConfigSpec> =
-  | { op: "and"; conditions: Condition<C>[] }
-  | { op: "or"; conditions: Condition<C>[] }
-  | { op: "not"; condition: Condition<C> };
+  | { op: "and"; clauses: Condition<C>[] }
+  | { op: "or"; clauses: Condition<C>[] }
+  | { op: "not"; clause: Condition<C> };
 ```
 
 ## Operation Types
@@ -388,7 +390,7 @@ interface ValidationError {
 Modifier stacking behavior.
 
 ```typescript
-type Stacking = "default" | "unique";
+type Stacking = "stack" | "unique" | { uniqueBy: string };
 ```
 
 - `"default"` - All modifiers apply normally
@@ -402,9 +404,8 @@ Generic serialized data container.
 
 ```typescript
 interface SerializedData<T> {
+  readonly version: number;
   readonly data: T;
-  readonly version: string;
-  readonly timestamp: number;
 }
 ```
 

@@ -114,12 +114,12 @@ const item = engine
   .build();
 ```
 
-### custom()
+### apply()
 
-Adds a modifier with a custom operation.
+Adds a modifier with a specific operation.
 
 ```typescript
-custom<M extends MetricOf<C>, O extends OperationOf<C>>(
+apply<M extends MetricOf<C>, O extends OperationOf<C>>(
   metric: M,
   operation: O
 ): { by(value: number): Builder<C> }
@@ -130,7 +130,7 @@ custom<M extends MetricOf<C>, O extends OperationOf<C>>(
 ```typescript
 const item = engine
   .builder("Powered Item")
-  .custom("Damage", "pow")
+  .apply("Damage", "pow")
   .by(2)
   .build();
 ```
@@ -191,7 +191,7 @@ with(metadata: {
 
 #### Parameters
 
-- `stacking` - Stacking behavior ("default" | "unique")
+- `stacking` - Stacking behavior `("stack" | "unique" | { uniqueBy: string })`
 - `priority` - Application priority (higher = applied later)
 - `source` - Source identifier for unique stacking
 
