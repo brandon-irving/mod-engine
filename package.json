@@ -1,6 +1,6 @@
 {
   "name": "mod-engine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "A TypeScript library for typed attributes and modifiers with deterministic evaluation",
   "main": "dist/index.js",
