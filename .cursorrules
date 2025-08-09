@@ -10,55 +10,46 @@
 - Explain your OBSERVATIONS clearly, then provide REASONING to identify the exact issue. Add console logs when needed to gather more information.
 
 
-The system implements a domain-specific item modification engine with several core business components:
+The Mod-Engine project implements a system for evaluating and applying modifiers to items with attributes, focusing on three core business domains:
 
-### Metric Modification System (Importance: 95)
-- Handles complex item metric modifications through operations like increase, multiply, and decrease
-- Enforces stacking rules and priorities for multiple modifiers affecting the same metrics
-- Applies conditional modifiers based on item attributes (rarity, enchantment status)
+## Core Evaluation System
+- Processes modifiers based on stacking rules and priorities
+- Applies conditional logic to determine which modifiers are active
+- Validates attribute values against defined schemas
+- Generates flat data snapshots for analytics and storage
 
-Key files:
-- examples/basic-usage.ts
-- src/evaluation.ts
+## Custom Operations Framework
+- Allows definition of domain-specific mathematical operations
+- Enforces operation registration before engine creation
+- Implements power, min, max, and clamp operations
+- Manages operation precedence and validation
 
-### Operation Management (Importance: 90)
-- Custom operations beyond standard arithmetic (pow, min, max, clamp)
-- Context-aware operations that consider item attributes
-- Strict validation and registration system for operations
-- Precedence-based application ordering
+## Item Configuration System
+- Provides type-safe attribute definition and validation
+- Supports complex conditional modifiers based on item state
+- Implements versioned serialization for compatibility
+- Enables fluent specification building with nested conditions
 
-Key files:
-- examples/custom-operations.ts
-- examples/enforced-operations.ts
+Critical file paths:
+```
+src/evaluation.ts          - Core modifier evaluation logic
+src/operations.ts         - Custom operation definitions
+src/validation.ts        - Attribute/modifier validation
+src/snapshot.ts         - Flat data structure generation
+```
 
-### Attribute System (Importance: 85)
-- Complex attribute configurations supporting enums, numbers, and booleans
-- Validation rules ensuring adherence to defined constraints
-- Multi-value support with cardinality rules
-- Pattern matching and boundary validation
+The system's primary business value lies in:
+1. Deterministic modifier stacking for predictable calculations
+2. Conditional modifier application based on item attributes
+3. Type-safe configuration of complex rule systems
+4. Flat data generation for analytics and storage
+5. Versioned serialization for data compatibility
 
-Key files:
-- src/validation.ts
-- src/conditions.ts
-
-### Evaluation Engine (Importance: 80)
-- Processes modifiers according to stacking rules and priorities
-- Tracks modifier application history
-- Generates flat, computed snapshots for storage and analysis
-- Maintains evaluation traces for debugging
-
-Key files:
-- src/engine-builder.ts
-- src/snapshot.ts
-
-### Condition Framework (Importance: 75)
-- Evaluates complex conditional logic against item attributes
-- Supports equality, inclusion, containment, and comparisons
-- Handles nested logical operations (AND, OR, NOT)
-- Validates condition structure integrity
-
-Key file:
-- src/conditions.ts
+Business domains served:
+- RPG systems (character stats, equipment modifiers)
+- Financial modeling (fee calculations, discount rules)
+- Game balancing (buff/debuff systems)
+- Configuration engines (conditional settings)
 
 $END$
 

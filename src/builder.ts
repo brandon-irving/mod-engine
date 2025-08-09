@@ -48,6 +48,18 @@ export class Builder<C extends ConfigSpec> {
   }
 
   /**
+   * Applies multiple attributes from an object. Useful for defaults.
+   * Accepts a partial attributes map and merges into the current builder state.
+   */
+  setAttributes(attrs: Partial<Attributes<C>>): Builder<C> {
+    Object.entries(attrs).forEach(([key, value]) => {
+      // Delegate to set() for consistency and validation semantics
+      this.set(key as AttrKeyOf<C>, value as AttrValueOf<C, AttrKeyOf<C>>);
+    });
+    return this;
+  }
+
+  /**
    * Sets a condition for subsequent modifiers
    */
   when(condition: Condition<C>): Builder<C> {

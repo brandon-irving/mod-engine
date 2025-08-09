@@ -1,54 +1,58 @@
 ---
-description: Applies to code implementing metric evaluation, condition handling, modifier stacking, and snapshot generation algorithms
-globs: src/evaluation.ts,src/conditions.ts,src/operations.ts,src/snapshot.ts,examples/*-operations.ts
+description: Used for analyzing evaluation algorithms, metrics computation, modifier application logic and snapshot generation
+globs: src/evaluation.ts,src/explain.ts,src/operations.ts,src/snapshot.ts
 alwaysApply: false
 ---
 
 
 # evaluation-algorithms
 
-Core evaluation algorithms handling metric calculations and modifier applications:
+The evaluation algorithms system handles computation of metrics through several key components:
 
-### Metric Evaluation Process (Importance: 95)
-- Processes item specifications through a pipeline of modifier applications
-- Applies modifiers based on priority and precedence rules
-- Handles conditional modifiers using attribute-based evaluation 
-- Tracks modifier application history for debugging/analysis
-- Validates final metric values against configuration rules
+### Modifier Processing (Importance: 95)
+- Filters modifiers based on conditions and stacking rules
+- Groups modifiers by custom stacking keys
+- Sorts by priority and operation precedence
+- Validates numeric results, rejecting NaN/Infinity values
+- Enforces metric completeness after evaluation
 
-### Modifier Stacking System (Importance: 90)
-- Implements complex stacking rules for combining multiple modifiers
-- Supports unique stacking constraints to prevent duplicate effects
-- Applies priority-based ordering for modifier application
-- Handles conditional stacking based on item attributes
+File: `src/evaluation.ts`
 
-### Custom Operation Processing (Importance: 85)
-- Executes domain-specific operations like `pow`, `min`, `max`, `clamp`
-- Supports context-aware calculations using item attributes
-- Enforces precedence rules between different operation types
-- Validates operation results for numeric safety
+### Operation Management (Importance: 90)
+- Custom mathematical operations:
+  - Power: Raises value to modifier power
+  - Min/Max: Takes min/max between current and modifier
+  - Clamp: Caps value based on item level
+- Enforced operation registration with precedence values
+- Type-safe operation validation during engine building
 
-### Condition Evaluation Engine (Importance: 80)
-- Evaluates complex logical conditions against item attributes
-- Supports operators for equality, inclusion, containment, comparison
-- Handles nested AND/OR/NOT conditions
-- Validates condition structure and references
+Files: 
+- `src/operations.ts`
+- `examples/custom-operations.ts`
 
-### Snapshot Generation (Importance: 75)
-- Creates flattened item representations combining metrics and attributes
-- Generates predictable structures for API responses/storage
-- Ensures type safety for snapshot property access
-- Preserves computational history for analysis
+### Snapshot Generation (Importance: 85)
+- Generates flat, predictable data structures combining:
+  - Computed metrics
+  - Original attributes  
+  - Applied modifiers
+- Used for:
+  - API responses
+  - Database storage
+  - Analytics aggregation
+  - Test assertions
+  - Caching computed values
+  - CSV exports
 
-Relevant Files:
-```
-src/evaluation.ts
-src/conditions.ts
-src/operations.ts
-src/snapshot.ts
-examples/custom-operations.ts
-examples/enforced-operations.ts
-```
+Files:
+- `src/snapshot.ts`
+- `examples/snapshot-demo.ts`
+
+### Result Explanation (Importance: 75)
+- Transforms evaluation results into stable "AppliedTrace" format
+- Maps computation steps without recalculation
+- Provides debugging and UI-friendly output structure
+
+File: `src/explain.ts`
 
 $END$
 

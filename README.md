@@ -36,11 +36,16 @@ const config = defineConfig({
 
 const engine = createEngine(config);
 
-// Build items with modifiers
+// Prefer initializing attributes from a defaults object
+const attributeDefaults = {
+  Rarity: "Epic" as const,
+  Level: 50,
+};
+
+// Build items with modifiers using native bulk attribute setter
 const epicSword = engine
   .builder("Epic Sword")
-  .set("Rarity", "Epic")
-  .set("Level", 50)
+  .setAttributes(attributeDefaults)
   .increase("Damage")
   .by(100)
   .when({ op: "eq", attr: "Rarity", value: "Epic" })

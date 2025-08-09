@@ -1,61 +1,59 @@
 ---
-description: Documentation and modeling of core data structures related to item metrics, attributes, modifiers and evaluation results
-globs: src/types.ts,src/evaluation.ts,src/snapshot.ts,src/serialization.ts
+description: Use this spec for understanding data structures, item specifications, attributes and evaluation results.
+globs: src/types.ts,src/evaluation.ts,src/serialization.ts,src/snapshot.ts
 alwaysApply: false
 ---
 
 
 # data-models
 
-## Core Data Models
+### Core Data Structures
 
-### Item Specification Model
-Defines the foundational structure for items with:
-- Attributes dictionary storing enum, number, boolean and string values
-- Modifiers list containing metric adjustments and stacking rules
-- Conditions that determine when modifiers should be applied
-- Metadata for tracking and identification
+#### Item Specification Model (Importance: 95)
+- Defines the fundamental structure of items with attributes and modifiers
+- Supports type-safe attribute definitions for enums, numbers, strings and booleans
+- Includes validation constraints like min/max values and allowed patterns
+- Enables conditional modifiers based on attribute values
 
-Importance Score: 95
+#### Modifier Model (Importance: 90)
+- Represents modifications to item metrics
+- Contains operation type, value, and priority
+- Supports stacking rules for combining multiple modifiers
+- Includes conditional logic for selective application
 
-### Metric Modifiers Model
-Represents modifications to item metrics:
-- Operation type (increase, multiply, decrease etc.)
-- Numeric value to apply
-- Stacking behavior rules
-- Priority for application order
-- Conditional triggers
+#### Evaluation Results Model (Importance: 85) 
+- Captures computed metrics after modifier application
+- Maintains trace of applied modifiers and their effects
+- Supports serializable format for storage/transmission
+- Includes intermediate calculation states for debugging
 
-Importance Score: 90
+#### Attribute Schema Model (Importance: 80)
+- Defines validation rules for different attribute types
+- Supports enum values with cardinality constraints
+- Enables number ranges with min/max bounds
+- Allows string patterns with regex validation
 
-### Evaluation Results Model
-Captures the complete state of metric calculations:
-- Final computed metric values
-- Modifier application traces
-- Intermediate calculation states
-- Applied condition results
+File Paths:
+- `src/types.ts`: Core type definitions
+- `src/evaluation.ts`: Evaluation result structures
+- `src/serialization.ts`: Serialization formats
+- `src/snapshot.ts`: Snapshot representations
 
-Importance Score: 85
+### Validation Rules
 
-### Snapshot Model 
-Provides a flattened view combining:
-- Original item attributes
-- Computed metric values
-- Applied modifier effects
-- Evaluation metadata
+- Attributes must conform to their defined schemas
+- Modifier values must be finite numbers
+- Operations must be registered and valid
+- Metrics must be present in final evaluation
+- Enum values must be within allowed sets
+- Number values must be within defined bounds
 
-Importance Score: 80
+### Serialization Format
 
-## File Structure
-
-Key data model implementations:
-```
-src/
-  types.ts           - Core type definitions and interfaces
-  evaluation.ts      - Evaluation result structures
-  snapshot.ts        - Snapshot data models
-  serialization.ts   - Serialization formats
-```
+- Version-controlled serialization scheme
+- Deep cloning support for complex objects
+- Flat snapshot generation for storage/analysis
+- Type-safe deserialization with validation
 
 $END$
 

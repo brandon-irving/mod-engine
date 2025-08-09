@@ -46,6 +46,26 @@ const item = engine
   .build();
 ```
 
+### setAttributes()
+
+Applies multiple attributes from an object. Useful for defaults or cloning state.
+
+```typescript
+setAttributes(attrs: Partial<Attributes<C>>): Builder<C>
+```
+
+#### Example
+
+```typescript
+const defaults = {
+  Rarity: "Epic" as const,
+  Level: 50,
+  Enchanted: true,
+};
+
+const item = engine.builder("Magic Sword").setAttributes(defaults).build();
+```
+
 ## Modifier Methods
 
 ### increase()
@@ -139,7 +159,7 @@ when(condition: Condition<C>): Builder<C>
 ```typescript
 const item = engine
   .builder("Conditional Item")
-  .set("Rarity", "Epic")
+  .setAttributes({ Rarity: "Epic" as const })
   // Only applies to Epic items
   .when({ op: "eq", attr: "Rarity", value: "Epic" })
   .multiply("Damage")

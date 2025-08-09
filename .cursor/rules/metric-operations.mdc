@@ -1,5 +1,5 @@
 ---
-description: Documentation and analysis of metric calculations, operations, precedence rules and stacking behavior for item attribute modifications
+description: Handles configuration and evaluation of metric operations, stacking rules, and value modifications in mod-engine
 globs: src/operations.ts,src/evaluation.ts,examples/custom-operations.ts,examples/enforced-operations.ts
 alwaysApply: false
 ---
@@ -7,31 +7,40 @@ alwaysApply: false
 
 # metric-operations
 
-The metric operations system provides specialized logic for modifying and calculating item metrics through:
+### Core Operation System (Importance: 95)
+- Built-in operations (sum, multiply, subtract) with defined precedence rules
+- Operation stacking behavior controls how multiple modifiers combine
+- Registration system ensures all operations are properly declared before use
+- Precedence rules determine evaluation order across different operation types
 
-### Core Operation Types
-1. Built-in Operations (Importance: 85)
-- Standard operations like `increase`, `multiply`, `decrease` with defined precedence 
-- Validation ensures numeric safety (no NaN/Infinity)
-- Operations stack according to priority rules
+### Custom Operations (Importance: 90)
+Located in `examples/custom-operations.ts`:
+- Power Operation: Raises current value to modifier's power
+- Min/Max Operations: Takes minimum/maximum between current and modifier values 
+- Clamp Operation: Restricts values based on item Level attribute
+- Operation precedence controls application order of custom operations
 
-2. Custom Operations (Importance: 90) 
-- User-defined operations like `pow`, `min`, `max`, `clamp`
-- Context-aware calculations based on item attributes
-- Operations must be registered before engine usage
+### Modifier Stacking Logic (Importance: 85)
+Located in `src/evaluation.ts`:
+- Groups modifiers by stacking keys to prevent duplicate effects
+- Applies unique stacking behavior per operation type
+- Handles priority-based modifier application
+- Validates numeric results, rejecting NaN/Infinity values
 
-### Stacking Behavior (Importance: 95)
-- Priority-based application of modifiers
-- Unique stacking constraints prevent duplicate effects
-- Conditional modifiers based on item attributes
-- Tracked modifier application with before/after values
+### Operation Registration System (Importance: 80)
+Located in `examples/enforced-operations.ts`:
+- Strict validation ensuring all declared operations are registered
+- Type-safe operation registration using builder pattern
+- Bulk registration capability for multiple operations
+- Runtime validation of operation completeness
 
-### Operation Registration (Importance: 80)
-- Strict validation ensures all operations are registered
-- Type-safe builder patterns prevent runtime errors
-- Bulk registration support for operation sets
+### Operation Evaluation (Importance: 75)
+- Sequential application of operations based on precedence
+- Handles conditional operation application
+- Validates operation results against configuration rules
+- Maintains operation history for debugging/tracing
 
-Relevant Files:
+### Relevant Files:
 - src/operations.ts
 - src/evaluation.ts 
 - examples/custom-operations.ts
