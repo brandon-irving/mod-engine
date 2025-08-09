@@ -10,6 +10,8 @@ export default defineConfig({
         "node_modules/**",
         "dist/**",
         "examples/**",
+        "docs/**",
+        "scripts/**",
         "tests/**",
         "*.config.*",
         "src/index.ts", // Just exports, no logic to test
