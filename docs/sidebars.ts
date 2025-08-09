@@ -20,7 +20,11 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Core Concepts",
-      items: ["concepts/overview", "concepts/items-and-attributes"],
+      items: [
+        "concepts/overview",
+        "concepts/items-and-attributes",
+        "concepts/engine-builder",
+      ],
     },
     {
       type: "category",
