@@ -4,6 +4,7 @@
   "private": true,
   "description": "Next.js example demonstrating mod-engine RPG item modification system",
   "scripts": {
+    "preinstall": "npm --prefix ../../ run build",
     "prebuild": "npm --prefix ../../ run build",
     "dev": "next dev",
     "build": "next build",
