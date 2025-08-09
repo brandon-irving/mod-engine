@@ -42,3 +42,11 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Docs build artifacts
+docs/build/
+docs/static/demo/
+
+# Next.js example build artifacts
+examples/nextjs-example/.next/
+examples/nextjs-example/out/

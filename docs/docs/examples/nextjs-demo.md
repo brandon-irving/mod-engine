@@ -1,5 +1,7 @@
 # Next.js Interactive Demo
 
+👉 Live demo: <a href="/mod-engine/demo/" data-noBrokenLink>Open the embedded Next.js demo</a>
+
 The Next.js demo provides a complete interactive experience for exploring Mod-Engine capabilities.
 
 ## Running the Demo
@@ -174,7 +176,7 @@ Understand modifier ordering:
 
 ## Deployment
 
-The demo can be deployed to any platform that supports Next.js:
+The demo is embedded into the documentation and available at `/mod-engine/demo/`. It can also be deployed to any platform that supports Next.js:
 
 ```bash
 # Build for production

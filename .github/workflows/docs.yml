@@ -39,10 +39,24 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install dependencies
-        run: cd docs && npm ci
+        run: |
+          npm ci --workspaces=false
+          cd docs && npm ci
 
       - name: Build documentation
-        run: cd docs && npm run build
+        run: |
+          # Build and export the Next.js example for static hosting
+          cd examples/nextjs-example
+          npm ci
+          npm run build
+          npm run export
+          cd ../..
+          # Place the exported app under docs static to serve at /mod-engine/demo/
+          rm -rf docs/static/demo
+          mkdir -p docs/static/demo
+          cp -R examples/nextjs-example/out/* docs/static/demo/
+          # Build the Docusaurus site
+          cd docs && npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
