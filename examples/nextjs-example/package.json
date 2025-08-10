@@ -8,7 +8,7 @@
     "prebuild": "npm --prefix ../../ run build",
     "dev": "next dev",
     "build": "next build",
-    "export": "next export",
+    "export": "next build && echo 'Static export complete. Files available in ./out'",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
