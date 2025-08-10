@@ -1,4 +1,4 @@
-<p align="center"><img src="https://brandon-irving.github.io/mod-engine/img/_moddy_driving.png" width="60%" alt="Mod Engine logo" /></p>
+<p align="center"><img src="https://storage.googleapis.com/public-irving/apps/mod-engine/_moddy_driving.png" width="60%" alt="Mod Engine logo" /></p>
 
 <div align="center">
 <h1>Mod Engine</h1>
